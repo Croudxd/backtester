@@ -1,2 +1,6 @@
 /target
+Cargo.lock
+gitignore-docs/
 .obsidian
+python/.venv
+data/
