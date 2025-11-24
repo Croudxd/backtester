@@ -1,3 +1,6 @@
+use crate::engine::csv::load_full_csv::load_full_csv;
+mod engine;
 fn main() {
-    println!("Hello, world!");
+    let data_vec = load_full_csv();
+
 }
