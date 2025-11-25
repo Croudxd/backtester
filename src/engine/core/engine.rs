@@ -6,7 +6,7 @@ use std::collections::HashMap;
 use crate::engine::model::indicator_config::Indicators;
 use crate::engine::model::strategy_config::StrategyConfig;
 
-pub fn backtest_engine(path: Path)
+pub fn backtest_engine(path: &Path)
 {
         //Define all our variables we are going to need.
         let config = loader(path);
@@ -16,7 +16,7 @@ pub fn backtest_engine(path: Path)
 
 
         let mut indicatorPeriods = Vec::new();
-        let max_window = indicatorPeriods.iter().max().expect("vector is empty");
+        let max_window = *indicatorPeriods.iter().max().expect("vector is empty");
         for indicator in &config.indicators {
                 match indicator {
                         Indicators::Sma { windows } => {
@@ -30,8 +30,8 @@ pub fn backtest_engine(path: Path)
 
 
         //Main loop to calculate sma.
-        for day_index in (*max_window - 1)..csv.len() {
-                for &window in window_sizes.iter() {
+        for day_index in (&max_window - 1)..csv.len() {
+                for &window in indicatorPeriods.iter() {
                         let start_index = day_index + 1 - window; //day_index (max_window - 1) + 1 - current window
                         let sma = calc_sma(csv[start_index..=day_index].to_vec()); //calculate sma between start_index and day_index
                         sma_hashmap.insert(window, sma);
