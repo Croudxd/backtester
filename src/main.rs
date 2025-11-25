@@ -1,6 +1,12 @@
-use crate::engine::csv::load_full_csv::load_full_csv;
+use crate::engine::core::engine::backtest_engine;
+
 mod engine;
+
+
+
 fn main() {
-    let data_vec = load_full_csv();
+    let path = Path::new("../sample.json");
+    backtest_engine();
+
 
 }
