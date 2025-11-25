@@ -1,4 +1,4 @@
-use crate::engine::model::DailyQuote;
+use crate::engine::model::daily_quote::DailyQuote;
 use csv::Reader;
 
 pub fn load_full_csv() -> Vec<DailyQuote>
