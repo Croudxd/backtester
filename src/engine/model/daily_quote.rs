@@ -5,11 +5,10 @@ use serde::Deserialize;
 #[derive(Debug, Deserialize, Clone)]
 pub struct DailyQuote {
 
-    pub date: NaiveDate,
-    pub price: f64,
-    pub close: f64,
-    pub high: f64,
-    pub low: f64,
-    pub open: f64,
-    pub volume: f64,
+    pub Date: NaiveDate,
+    pub Close: f64,
+    pub High: f64,
+    pub Low: f64,
+    pub Open: f64,
+    pub Volume: f64,
 }
