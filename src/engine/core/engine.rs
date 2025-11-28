@@ -5,10 +5,18 @@ use crate::engine::indicators::sma::calc_sma;
 use crate::engine::metrics::profit_loss::profit_loss;
 use crate::engine::model::trade::Trade;
 use crate::engine::metrics::win_loss::win_loss;
+use crate::engine::model::daily_quote::DailyQuote;
 
 pub fn backtest_engine(path: &Path)
 {
         let csv = load_full_csv();
+        let mut trades: Vec<Trade> = Vec::new();
+
+        trades = main_loop(csv);
+}
+
+
+pub fn main_loop(csv: Vec<DailyQuote> ) -> Vec<Trade>{
         let sma_one: usize = 10;
         let sma_two: usize = 20;
         let starting_cash: f64 = 1000.0;
@@ -17,12 +25,15 @@ pub fn backtest_engine(path: &Path)
         let mut buy_count: usize = 0;
         let mut sell_count: usize = 0;
         let mut trades: Vec<Trade> = Vec::new();
+
+
+
+
         for idx in 0..csv.len() {
 
                 if idx <= sma_two {
                         continue;
                 } else {
-
                         let slice_one = csv[idx - sma_one..idx].to_vec();
                         let slice_two = csv[idx - sma_two..idx].to_vec();
                         let sma_calc_1 = calc_sma(slice_one);
@@ -56,11 +67,10 @@ pub fn backtest_engine(path: &Path)
                         }
                 }
         }
-        let wl = win_loss(trades);
+
+        let wl = win_loss(trades.clone());
         current_cash += csv[csv.len() - 1].Close * shares;
         let prof_loss = profit_loss(current_cash, starting_cash);
         println!("Current Cash: {}, Buy Count: {}, Sell Count: {}, profit/loss: {}, win/loss: {}", current_cash, buy_count, sell_count, prof_loss, wl);
-
+        return trades;
 }
-
-
