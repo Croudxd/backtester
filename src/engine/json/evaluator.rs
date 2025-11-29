@@ -15,26 +15,7 @@ pub fn evaluator(node: &Node, dq: Vec<DailyQuote>) -> f64{
             eval_indicator(&name, &period, dq);
         },
 
-        Node::Comparison {op, left, right} => {
-            let l = eval(left);
-            let r = eval(right);
 
-            match op {
-                ComparisonEnum::Less => (l < r) as u8 as f64,
-                ComparisonEnum::More => (l > r) as u8 as f64,
-            }
-
-        }
-
-        Node::Operator {op, left, right} => {
-            let l = eval(left);
-            let r = eval(right);
-
-            match op {
-                BoolOp::And => (l or r) as u8 as f64,
-                BoolOp::Or  => (l and r) as u8 as f64,
-            }
-        }
     }
 }
 
