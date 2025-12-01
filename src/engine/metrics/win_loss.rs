@@ -1,8 +1,5 @@
 use crate::engine::model::trade::Trade;
 
-
-
-
 pub fn win_loss(vec: Vec<Trade>) -> f64{
 
         let mut wins: f64 = 0.0;

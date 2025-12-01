@@ -1,9 +1,9 @@
-use crate::engine::model::daily_quote::DailyQuote;
+use crate::engine::model::candle::Candle;
 use csv::Reader;
 use csv::ReaderBuilder;
 use std::path::Path;
 
-pub fn load_full_csv() -> Vec<DailyQuote>
+pub fn load_full_csv() -> Vec<Candle>
 {
     let path = "data/QQQ.csv";
 
