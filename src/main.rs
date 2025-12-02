@@ -4,31 +4,29 @@ use crate::engine::model::candle::Candle;
 use std::path::Path;
 use crate::engine::csv::load_full_csv::load_full_csv;
 use crate::engine::indicators::sma::calc_sma;
-use crate::engine::indicators::rsi;
+use crate::engine::indicators::rsi::calc_init_rsi;
 use crate::engine::model::portfolio::Portfolio;
 use crate::engine::model::portfolio::BacktestPortfolio;
+use crate::engine::model::context::Context;
 
+fn strategy(context: &mut Context)
+{
+  
+    if context.calc_rsi(10) < context.calc_sma(30) {
+        context.buy();
+    }
+
+    if context.calc_sma(10) > context.calc_sma(30) {
+        context.sell();
+    }
+
+}
 
 fn main() {
-    //define strategy using a closure
-    let mut strategy = |candle: &[Candle], portfolio: &mut BacktestPortfolio|{
-        
-        if calc_sma(10, candle) < calc_sma(30, candle)
-        {
-            let close = candle[candle.len() - 1].Close;
-            portfolio.buy(close); 
-            
-        }
-        else if calc_sma(30, candle) < calc_sma(10, candle)
-        {
-            let close = candle[candle.len() - 1].Close;
-            portfolio.sell(close); 
-        }
-    };
+    let path = "data/QQQ.csv".to_string();
+    backtest_engine(strategy, 100000, path); //Starting cash, path for csv, anything else needed.
 
-
-    let mut portfolio = BacktestPortfolio::new(10000.0); 
-    backtest_engine(strategy, &mut portfolio);
-    portfolio.print_results();
-    //live_engine(closure)
 }
+
+
+

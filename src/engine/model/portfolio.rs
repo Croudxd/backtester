@@ -33,15 +33,26 @@ impl BacktestPortfolio{
 impl Portfolio for BacktestPortfolio{
     fn buy(&mut self, price: f64){
         let shares_to_buy =(self.current_cash / price).trunc();
-        self.stocks += shares_to_buy; 
-        self.current_cash -= shares_to_buy * price; 
+        if shares_to_buy == 0.0{
+
+        }
+        else {
+            self.stocks += shares_to_buy; 
+            self.current_cash -= shares_to_buy * price; 
+            println!(" buying at {}, this many shares: {}", price, shares_to_buy);
+
+        }
     }
-    fn sell(&mut self, price: f64){ 
-        self.current_cash += self.stocks * price;
-        self.stocks = 0.0;
+   
+    fn sell(&mut self, price: f64){
+        if self.stocks >= 1.0{
+            self.current_cash += self.stocks * price;
+            println!(" selling at {}, this many shares: {}", price, self.stocks);
+            self.stocks = 0.0;
+        }
     }
     fn print_results(&mut self){
-        print!("Current cash: {}", self.current_cash, )
+        print!("Current cash: {} ", self.current_cash);
     }
 
     fn end(&mut self, price: f64)
