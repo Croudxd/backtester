@@ -13,6 +13,9 @@ pub fn backtest_engine(strat: fn(&mut Context), starting_cash: usize, path: Stri
         context.add_candle(candles[idx].clone());
         strat(&mut context);
     }
-    context.portfolio.end(candles[candles.len() - 1].Close);
-    context.portfolio.print_results();
+    context.portfolio.end(
+        candles[candles.len() - 1].Close,
+        candles[candles.len() - 1].Date,
+    );
+    context.results();
 }

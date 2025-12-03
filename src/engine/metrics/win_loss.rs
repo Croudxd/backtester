@@ -1,6 +1,6 @@
 use crate::engine::model::trade::Trade;
 
-pub fn win_loss(vec: Vec<Trade>) -> f64{
+/*pub fn win_loss(vec: Vec<Trade>) -> f64{
 
         let mut wins: f64 = 0.0;
         let mut losses: f64 = 0.0;
@@ -23,4 +23,4 @@ pub fn win_loss(vec: Vec<Trade>) -> f64{
                 }
         }
         return wins / losses ;
-}
+}*/

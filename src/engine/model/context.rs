@@ -30,12 +30,13 @@ impl Context {
 
     pub fn buy(&mut self) {
         let close = self.candle[self.candle.len() - 1].Close;
-        self.portfolio.buy(close);
+        self.portfolio
+            .buy(close, self.candle[self.candle.len() - 1].Date);
     }
-
     pub fn sell(&mut self) {
         let close = self.candle[self.candle.len() - 1].Close;
-        self.portfolio.sell(close);
+        self.portfolio
+            .sell(close, self.candle[self.candle.len() - 1].Date);
     }
 
     pub fn calc_sma(&mut self, size: usize) -> f64 {
@@ -84,5 +85,9 @@ impl Context {
 
     pub fn add_candle(&mut self, candle: Candle) {
         self.candle.push(candle);
+    }
+
+    pub fn results(&mut self) {
+        self.portfolio.print_results();
     }
 }
