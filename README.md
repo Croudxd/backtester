@@ -48,3 +48,19 @@ fn main() {
     let path = "data/QQQ.csv".to_string();
     backtest_engine(strategy, 100000, path); //pass in the strategy, starting cash and the path to csv.
 }```
+
+
+This project is quite messy. It was my first time building something like this and so I dont expect it to be perfect, also learning indicators for the first time so only a minimal amount.
+
+Somethings that can be improved:
+ - Cleaning up the code
+ - Adding more indicators
+ - Adding more metrics
+ - Adding a better output
+ - Adding more tests
+ - Adding benchmarks for speed
+ - Probably a few ways to speed up the engine, however as its not life its not too threatening.
+
+Overall this was a fun and good project built to learn about backtesters, and put my foot into the world of quantative development it also helped teach me some more rust skills, now i know about function pointers and impl/traits.
+
+This probably wont be continued unless I find the motivation down the road.
