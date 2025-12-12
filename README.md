@@ -7,6 +7,8 @@ Strategy-backtest-engine is a lightweight but extensible backtesting framework b
 
 Fully built in rust.
 
+- - - 
+## Running main and tests
 To run:
 1. Clone the repo.
 2. Inside backtester run `cargo build`
@@ -15,3 +17,34 @@ This will run main which holds a pre configured strategy.
 
 To test:
 1. `cargo test`
+
+- - - 
+## How to use:
+To gather the data:
+Create a venv and install yfinance
+`pip install yfinance`
+`python/pull_data.py`
+
+Below is a basic usage of the program. 
+
+Just create a function we can then pass this function name to the backtest_engine function with the starting cash and path of the csv.
+
+Once main is run it will produce the results to console.
+```rust
+use crate::engine::core::backtest_engine::backtest_engine;
+use crate::engine::model::context::Context;
+
+//basic strategy
+fn strategy(context: &mut Context) {
+    if context.calc_ema(10) < context.calc_ema(30) {
+        context.buy();
+    }
+    if context.calc_rsi(20) > context.calc_rsi(30) {
+        context.sell();
+    }
+}
+
+fn main() {
+    let path = "data/QQQ.csv".to_string();
+    backtest_engine(strategy, 100000, path); //pass in the strategy, starting cash and the path to csv.
+}```
