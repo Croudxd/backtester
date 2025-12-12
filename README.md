@@ -47,9 +47,11 @@ fn strategy(context: &mut Context) {
 fn main() {
     let path = "data/QQQ.csv".to_string();
     backtest_engine(strategy, 100000, path); //pass in the strategy, starting cash and the path to csv.
-}```
+}
+```
 
-
+### Conclusion
+- - -
 This project is quite messy. It was my first time building something like this and so I dont expect it to be perfect, also learning indicators for the first time so only a minimal amount.
 
 Somethings that can be improved:
