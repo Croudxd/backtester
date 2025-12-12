@@ -6,7 +6,7 @@ use crate::engine::indicators::sma::calc_sma;
 use crate::engine::model::candle::Candle;
 use crate::engine::model::portfolio::Portfolio;
 
-struct Avg_gain_loss {
+struct avg_gain_loss {
     avg_gain: f64,
     avg_loss: f64,
 }
@@ -14,7 +14,7 @@ struct Avg_gain_loss {
 pub struct Context {
     pub portfolio: Box<dyn Portfolio>,
     pub candle: Vec<Candle>,
-    avg_history: Vec<Avg_gain_loss>,
+    avg_history: Vec<avg_gain_loss>,
     prev_ema: Vec<f64>,
 }
 
@@ -48,7 +48,7 @@ impl Context {
             return 0.0;
         } else if self.candle.len() == size {
             let (avg_gain, avg_loss) = calc_init_rsi(&self.candle);
-            let avg = Avg_gain_loss {
+            let avg = avg_gain_loss {
                 avg_gain: avg_gain,
                 avg_loss: avg_loss,
             };
@@ -61,7 +61,7 @@ impl Context {
                 self.avg_history[self.avg_history.len() - 1].avg_gain,
                 self.avg_history[self.avg_history.len() - 1].avg_loss,
             );
-            self.avg_history.push(Avg_gain_loss {
+            self.avg_history.push(avg_gain_loss {
                 avg_gain: avg_gain,
                 avg_loss: avg_loss,
             });

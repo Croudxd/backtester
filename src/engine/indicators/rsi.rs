@@ -1,8 +1,8 @@
 use crate::engine::model::candle::Candle;
 
 pub fn calc_init_rsi(vec: &[Candle]) -> (f64, f64) {
-    let up_moves = calc_upMoves(vec);
-    let down_moves = calc_downMoves(vec);
+    let up_moves = calc_up_moves(vec);
+    let down_moves = calc_down_moves(vec);
 
     let upmoves_sma = calc_sma(up_moves);
     let downmoves_sma = calc_sma(down_moves);
@@ -27,7 +27,7 @@ pub fn calc_rsi(avg_gain: f64, avg_loss: f64) -> f64 {
     return rsi;
 }
 
-fn calc_upMoves(vec: &[Candle]) -> Vec<f64> {
+fn calc_up_moves(vec: &[Candle]) -> Vec<f64> {
     let mut up_move_vec: Vec<f64> = Vec::new();
     //Calculate close t - close t-1
     // either a positive number or 0
@@ -46,7 +46,7 @@ fn calc_upMoves(vec: &[Candle]) -> Vec<f64> {
     return up_move_vec;
 }
 
-fn calc_downMoves(vec: &[Candle]) -> Vec<f64> {
+fn calc_down_moves(vec: &[Candle]) -> Vec<f64> {
     //Calculate close t-1 - close t
     // either a positive number or 0
     let mut down_move_vec: Vec<f64> = Vec::new();
