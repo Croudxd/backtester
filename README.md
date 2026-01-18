@@ -61,7 +61,6 @@ Somethings that can be improved:
  - Adding a better output
  - Adding more tests
  - Adding benchmarks for speed
- - Probably a few ways to speed up the engine, however as its not life its not too threatening.
 
 Overall this was a fun and good project built to learn about backtesters, and put my foot into the world of quantative development it also helped teach me some more rust skills, now i know about function pointers and impl/traits.
 
